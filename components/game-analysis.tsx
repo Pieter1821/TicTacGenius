@@ -18,7 +18,7 @@ export default function GameAnalysis({ analysis, gameHistory, winner, isDraw }: 
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex-1"
+      className="flex-1 w-full"
     >
       <Card className="shadow-xl bg-white rounded-xl border-0 h-full">
         <CardHeader className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-t-xl border-b border-indigo-100">
@@ -86,13 +86,13 @@ export default function GameAnalysis({ analysis, gameHistory, winner, isDraw }: 
                           )}
                         </span>
                       </div>
-                      <div className="grid grid-cols-3 gap-1 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-3 rounded-md">
+                      <div className="grid grid-cols-3 gap-1 sm:gap-2 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-2 sm:p-3 rounded-md">
                         {historyItem.board.map((row, rowIdx) =>
                           row.map((cell, colIdx) => (
                             <div
                               key={`${rowIdx}-${colIdx}`}
                               className={`
-                                w-10 h-10 flex items-center justify-center text-sm
+                                aspect-square flex items-center justify-center text-sm
                                 ${
                                   cell === "X"
                                     ? "bg-blue-100 text-blue-600"
@@ -104,9 +104,9 @@ export default function GameAnalysis({ analysis, gameHistory, winner, isDraw }: 
                               `}
                             >
                               {cell === "X" ? (
-                                <XCircle className="h-6 w-6" />
+                                <XCircle className="w-2/3 h-2/3" />
                               ) : cell === "O" ? (
-                                <Circle className="h-6 w-6" />
+                                <Circle className="w-2/3 h-2/3" />
                               ) : (
                                 ""
                               )}

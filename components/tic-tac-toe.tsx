@@ -322,7 +322,7 @@ export default function TicTacToe() {
     <motion.button
       onClick={() => handleClick(i)}
       disabled={gameOver || squares[i] !== EMPTY || !isXNext || aiThinking}
-      className={`w-28 h-28 md:w-32 md:h-32 text-5xl font-bold flex items-center justify-center transition-all duration-200 
+      className={`w-full aspect-square text-4xl font-bold flex items-center justify-center transition-all duration-200 
       ${lastMove === i ? "ring-4 ring-yellow-400" : ""}
       ${
         squares[i] === EMPTY
@@ -346,8 +346,9 @@ export default function TicTacToe() {
             animate={{ scale: 1, rotate: 360 }}
             exit={{ scale: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="w-2/3 h-2/3 flex items-center justify-center"
           >
-            <XCircle className="h-16 w-16" />
+            <XCircle className="w-full h-full" />
           </motion.div>
         )}
         {squares[i] === PLAYER_O && (
@@ -357,8 +358,9 @@ export default function TicTacToe() {
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="w-2/3 h-2/3 flex items-center justify-center"
           >
-            <Circle className="h-16 w-16" />
+            <Circle className="w-full h-full" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -366,42 +368,46 @@ export default function TicTacToe() {
   )
 
   return (
-    <div className="flex flex-col md:flex-row w-full gap-8">
-      <div className="flex flex-col items-center">
-        <Card className="p-6 shadow-xl bg-white rounded-xl border-0 max-w-2xl">
+    <div className="flex flex-col lg:flex-row w-full gap-6 lg:gap-8">
+      <div className="flex flex-col items-center w-full lg:w-auto">
+        <Card className="p-3 sm:p-6 shadow-xl bg-white rounded-xl border-0 w-full max-w-md mx-auto">
           <div className="mb-6 flex flex-col gap-4">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center flex-wrap gap-2">
               <div className="flex items-center gap-2">
-                <div className={`font-bold text-xl ${isXNext && !gameOver ? "text-blue-600" : "text-gray-600"}`}>
+                <div
+                  className={`font-bold text-lg sm:text-xl ${isXNext && !gameOver ? "text-blue-600" : "text-gray-600"}`}
+                >
                   <span className="flex items-center">
-                    <XCircle className="h-6 w-6 mr-1" />
-                    <span className="hidden sm:inline">You</span>
+                    <XCircle className="h-5 w-5 mr-1" />
+                    <span className="inline">You</span>
                   </span>
                 </div>
-                <div className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+                <div className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs sm:text-sm font-medium">
                   {gameOver ? "Game Over" : isXNext ? "Your Turn" : "AI Thinking..."}
                 </div>
-                <div className={`font-bold text-xl ${!isXNext && !gameOver ? "text-rose-600" : "text-gray-600"}`}>
+                <div
+                  className={`font-bold text-lg sm:text-xl ${!isXNext && !gameOver ? "text-rose-600" : "text-gray-600"}`}
+                >
                   <span className="flex items-center">
-                    <Circle className="h-6 w-6 mr-1" />
-                    <span className="hidden sm:inline">AI</span>
+                    <Circle className="h-5 w-5 mr-1" />
+                    <span className="inline">AI</span>
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-1 text-sm text-gray-500">
+            <div className="flex justify-between items-center flex-wrap gap-2 mt-2">
+              <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-500">
                 <GitBranch className="h-4 w-4" />
                 <span className="font-medium">Depth: {aiDepth}</span>
               </div>
 
-              <div className="flex items-center gap-1 text-sm text-gray-500">
+              <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-500">
                 <Clock className="h-4 w-4" />
                 <span>{formatTime(gameTime)}</span>
               </div>
 
-              <div className="flex items-center gap-1 text-sm text-gray-500">
+              <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-500">
                 <Trophy className="h-4 w-4" />
                 <span>
                   {stats.wins}-{stats.losses}-{stats.draws}
@@ -411,7 +417,7 @@ export default function TicTacToe() {
           </div>
 
           <motion.div
-            className="grid grid-cols-3 gap-4 mb-6 p-6 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-xl shadow-lg"
+            className="grid grid-cols-3 gap-3 sm:gap-4 mb-6 p-3 sm:p-6 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-xl shadow-inner"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -485,7 +491,7 @@ export default function TicTacToe() {
                   onClick={() => changeAiDepth(option.depth)}
                   variant={aiDepth === option.depth ? "default" : "outline"}
                   size="sm"
-                  className={`text-xs font-medium ${
+                  className={`text-xs py-3 font-medium ${
                     aiDepth === option.depth ? `bg-gradient-to-r ${option.color} shadow-sm border` : "bg-white"
                   }`}
                 >
